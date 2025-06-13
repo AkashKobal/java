@@ -1,0 +1,27 @@
+Maven:Project Management Tool
+
+How Maven works?
+Once you add dependency, maven will search this dependency in the local machine,
+i,e in .m2 hidden folder, if it is found in the local machine (.m2) folder than it will use that dependency,
+if it is not found in the local machine, then it will search in the remote repository (central repository),
+if it is found in the remote repository, then it will download that dependency and use it, if it is not found
+in the remote repository, then it will throw an error.
+
+
+Libraries in java are called JAR Files.
+
+Maven helps to compile, run, test, packaging, and deploy
+Java applications, maven alone will manage this.
+
+Maven is a build automation tool used primarily for Java projects.
+
+Apache Maven is a powerful project management tool that is based on POM (project object model).
+It is used for project builds, dependency management, and documentation.
+It simplifies the build process like ANT(Ant is a Java library and command line tool whose can
+be used to compile your code, fetching dependencies and for packaging).
+But it is much more advanced than ANT. In short terms, Maven is a tool that can be used for building
+and managing any Java-based project. Maven makes the day-to-day work of Java developers easier
+and generally helps with the overall comprehension of any Java-based project.
+
+
+
