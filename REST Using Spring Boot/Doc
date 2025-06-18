@@ -1,0 +1,15 @@
+REST: Representational State Transfer
+REST api is a set of rules that allow programs to communicate with each other over the internet. It uses standard HTTP methods like GET, POST, PUT, and DELETE to perform operations on resources, which are identified by URLs. REST APIs are stateless, meaning each request from a client contains all the information needed to process it, and they often return data in formats like JSON or XML.
+// Example of a REST API using Spring Boot
+
+// HTTP methods:
+GET - retrieve data from the server
+POST - send data to the server to create a new resource
+PUT - update data on the server
+DELETE - remove data from the server
+PATCH - apply partial modifications to a resource
+
+// to create a dummy server
+npm i -g json-server
+// to run the server
+json-server --watch db.json --port 3000

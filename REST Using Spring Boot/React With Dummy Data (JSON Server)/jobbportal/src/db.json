@@ -1,0 +1,85 @@
+{
+    "jobs": [
+        {
+            "id": 1,
+            "title": "Frontend Developer",
+            "company": "Tech Innovators",
+            "location": "Bengaluru, India",
+            "type": "Full-time",
+            "salary": "₹6,00,000 - ₹8,00,000",
+            "postedDate": "2025-06-10",
+            "skills": [
+                "React",
+                "JavaScript",
+                "HTML",
+                "CSS",
+                "Redux"
+            ],
+            "description": "Looking for a skilled frontend developer with experience in React and modern web technologies."
+        },
+        {
+            "id": 2,
+            "title": "Backend Developer",
+            "company": "CloudSync Solutions",
+            "location": "Remote",
+            "type": "Contract",
+            "salary": "₹10,00,000 - ₹12,00,000",
+            "postedDate": "2025-06-12",
+            "skills": [
+                "Node.js",
+                "Express",
+                "MongoDB",
+                "REST APIs"
+            ],
+            "description": "Build scalable backend services using Node.js for our cloud-based products."
+        },
+        {
+            "id": 3,
+            "title": "Data Analyst",
+            "company": "Finlytics",
+            "location": "Mumbai, India",
+            "type": "Internship",
+            "salary": "₹15,000/month",
+            "postedDate": "2025-06-14",
+            "skills": [
+                "Excel",
+                "Python",
+                "SQL",
+                "Power BI"
+            ],
+            "description": "Internship opportunity for aspiring data analysts with hands-on projects."
+        }
+    ],
+    "companies": [
+        {
+            "id": 101,
+            "name": "Tech Innovators",
+            "industry": "Software Development",
+            "website": "https://techinnovators.example.com"
+        },
+        {
+            "id": 102,
+            "name": "CloudSync Solutions",
+            "industry": "Cloud Services",
+            "website": "https://cloudsync.example.com"
+        },
+        {
+            "id": 103,
+            "name": "Finlytics",
+            "industry": "FinTech",
+            "website": "https://finlytics.example.com"
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "name": "Akash Kobal",
+            "email": "akash@example.com",
+            "resume": "https://example.com/resume/akash.pdf",
+            "appliedJobs": [
+                1,
+                3
+            ]
+        }
+    ]
+}
