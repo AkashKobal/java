@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,6 +20,29 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+
+    @Bean
+    public AuthenticationProvider authProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
+        return provider;
+    }
+
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        http.csrf(customizer -> customizer.disable())
+                .authorizeHttpRequests(request -> request.anyRequest().authenticated())
+                .httpBasic(Customizer.withDefaults())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        return http.build();
+    }
 
 
     // this configuration class is used to configure security for the application
@@ -27,6 +51,7 @@ public class SecurityConfig {
     // we can also use the default security filter chain by using the @EnableWebSecurity annotation
     // this will allow us to customize the security configuration
 
+    /*
     // we disable CSRF protection for all endpoints, and use custom authentication and authorization
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -42,32 +67,32 @@ public class SecurityConfig {
 
         return http.build();
 
+*/
+    // with lambda expression
+    /*
+     * Customizer<CsrfConfigurer<HttpSecurity>> custCsrf = new
+     * Customizer<CsrfConfigurer<HttpSecurity>>() {
+     *
+     * @Override public void customize(CsrfConfigurer<HttpSecurity> configurer) {
+     *
+     * configurer.disable(); } };
+     *
+     * Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.
+     * AuthorizationManagerRequestMatcherRegistry> custHttp = new
+     * Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.
+     * AuthorizationManagerRequestMatcherRegistry>() {
+     *
+     * @Override public void customize(
+     * AuthorizeHttpRequestsConfigurer<HttpSecurity>.
+     * AuthorizationManagerRequestMatcherRegistry registry) {
+     * registry.anyRequest().authenticated();
+     *
+     * } };
+     *
+     * http.authorizeHttpRequests(custHttp); http.csrf(custCsrf);
+     */
 
-        // with lambda expression
-        /*
-         * Customizer<CsrfConfigurer<HttpSecurity>> custCsrf = new
-         * Customizer<CsrfConfigurer<HttpSecurity>>() {
-         *
-         * @Override public void customize(CsrfConfigurer<HttpSecurity> configurer) {
-         *
-         * configurer.disable(); } };
-         *
-         * Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.
-         * AuthorizationManagerRequestMatcherRegistry> custHttp = new
-         * Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.
-         * AuthorizationManagerRequestMatcherRegistry>() {
-         *
-         * @Override public void customize(
-         * AuthorizeHttpRequestsConfigurer<HttpSecurity>.
-         * AuthorizationManagerRequestMatcherRegistry registry) {
-         * registry.anyRequest().authenticated();
-         *
-         * } };
-         *
-         * http.authorizeHttpRequests(custHttp); http.csrf(custCsrf);
-         */
-
-    }
+}
 
 /*
     // use InMemoryUserDetailsManager to create a user details service
@@ -98,19 +123,8 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user, admin);
     }
 */
-    // Authentication Provider
+// Authentication Provider
 // This is used to authenticate the user, and return the user details
 // We can also use custom authentication provider, by implementing the AuthenticationProvider interface
 // Here we are using the default authentication provider, which is the DaoAuthenticationProvider
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);  // create a class for UserDetailsService(MyUserDetailsService) and implement the loadUserByUsername method to load user details from the database
-        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
-        return provider;
-    }
-}
